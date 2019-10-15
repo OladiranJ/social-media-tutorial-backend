@@ -5,6 +5,9 @@ const admin     = require('firebase-admin')
 
 admin.initializeApp()
 
+const express   = require('express')
+const app       = express()
+
 
 
 
@@ -12,14 +15,7 @@ admin.initializeApp()
 
 // Functions
 
-exports.helloWorld = functions.https.onRequest((request, response) => {
-
-    response.send("Hello World!")
-
-})
-
-
-exports.getScreams  = functions.https.onRequest((req, res) => {
+app.get('/screams', (req, res) => {
 
     admin.firestore().collection('screams').get()
         .then((data) => {
@@ -34,7 +30,7 @@ exports.getScreams  = functions.https.onRequest((req, res) => {
 })
 
 
-exports.createScream  = functions.https.onRequest((req, res) => {
+app.post('/screams', (req, res) => {
 
     if(req.method !== 'POST'){
         return res.status(400).json({ error: 'Method not allowed' })
@@ -58,3 +54,6 @@ exports.createScream  = functions.https.onRequest((req, res) => {
         })
 
 })
+
+
+exports.api = functions.https.onRequest(app)
