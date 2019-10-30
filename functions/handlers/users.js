@@ -1,8 +1,8 @@
 // Requirements
 
-const { admin, db }    = require('../util/admin')
-const config    = require('../util/config')
-const firebase  = require('firebase')
+const { admin, db }     = require('../util/admin')
+const config            = require('../util/config')
+const firebase          = require('firebase')
 firebase.initializeApp(config)
 const { validateSignUpData, validateLoginData } = require('../util/validators')
 
@@ -106,8 +106,8 @@ exports.uploadImage = (req, res) => {
 
     const busboy    = new BusBoy({ headers: req.headers })
 
-    let imageFileName
     let imageToBeUploaded   = {}
+    let imageFileName
 
     busboy.on('file', (fieldname, file, filename, encoding, mimetype) => {
 
@@ -115,13 +115,17 @@ exports.uploadImage = (req, res) => {
         console.log(filename)
         console.log(mimetype)
 
+        if (mimetype !== 'image/jpeg' && mimetype !== 'image/png') {
+            return res.status(400).json({ error: 'Wrong file type submitted' });
+        }
+
         // my.image.png
         const imageExtension    = filename.split('.')[filename.split('.').length - 1]
         // 28734629387642.png
-        imageFileName           = `${Math.round(Math.random()*100000000000)}.${imageExtension}`
+        imageFileName           = `${Math.round(Math.random()*100000000000).toString()}.${imageExtension}`
         const filepath          = path.join(os.tmpdir(), imageFileName)
         imageToBeUploaded       = { filepath, mimetype }
-        file.prependListener(fs.createWriteStream(filepath))
+        file.pipe(fs.createWriteStream(filepath))
 
     })
 
@@ -143,8 +147,9 @@ exports.uploadImage = (req, res) => {
             return res.json({ message: 'Image uploaded successfully'})
         })
         .catch(err => {
+            console.log(err)
             console.error(err)
-            return res.status(500).json({ error: err.code })
+            return res.status(500).json({ error: 'something went wrong' })
         })
 
     })
