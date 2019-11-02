@@ -12,6 +12,8 @@ const { validateSignUpData, validateLoginData, reduceUserDetails } = require('..
 
 // User Functions
 
+
+// User Signup
 exports.signup  = (req, res) => {
 
     const newUser   = {
@@ -32,7 +34,7 @@ exports.signup  = (req, res) => {
     db.doc(`/users/${newUser.handle}`).get()
         .then(doc => {
             if (doc.exists) {
-                res.status(400).json({ handle: 'thishandle is already taken' })
+                res.status(400).json({ handle: 'this handle is already taken' })
             } else {
                 return firebase
                     .auth()
@@ -68,6 +70,8 @@ exports.signup  = (req, res) => {
 
 }
 
+
+// User Login
 exports.login   = (req, res) => {
 
     const user  = {
@@ -97,6 +101,7 @@ exports.login   = (req, res) => {
 
 }
 
+
 // Add user details
 exports.addUserDetails  = (req, res) => {
 
@@ -112,6 +117,34 @@ exports.addUserDetails  = (req, res) => {
         })
 
 }
+
+
+// Get own user details
+exports.getAuthenticatedUser = (req, res) => {
+
+    let userData = {}
+
+    db.doc(`/users/${req.user.handle}`).get()
+        .then(doc => {
+            if (doc.exists) {
+                userData.credentials = doc.data()
+                return db.collection('likes').where('userHandle', '==', req.user.handle).get()
+            }
+        })
+        .then(data => {
+            userData.likes = []
+            data.forEach(doc => {
+                userData.likes.push(doc.data())
+            })
+            return res.json(userData)
+        })
+        .catch(err => {
+            console.error(err)
+            return res.status(500).json({ error: err.code })
+        })
+
+}
+
 
 // Add user profile picture
 exports.uploadImage = (req, res) => {

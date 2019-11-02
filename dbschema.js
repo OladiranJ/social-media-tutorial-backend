@@ -24,3 +24,30 @@ let db  = {
     ]
 
 }
+
+const userDetails   = {
+
+    // Redux Data
+    credentials:    {
+        userId:     'N43KJ5H43KJHREW4J5H3JWMERHB',
+        email:      'user@email.com',
+        handle:     'user',
+        createdAt:  '2019-10-15T01:45:25.018Z',
+        imageUrl:   'image/akeoiagnsds/aowiefslkfje',
+        bio:        'Hello, my name is user, nice to meet you',
+        website:    'https://user.com',
+        location:   'Los Angeles, CA'
+    },
+    
+    likes:  [
+        {
+            userHandle: 'user',
+            screamId:   'hh705oWfWucVzGbHH2pa'
+        },
+        {
+            userHandle: 'user',
+            screamId:   '3IOnFoQexRcofs5OhBXO'
+        }
+    ]
+
+}
