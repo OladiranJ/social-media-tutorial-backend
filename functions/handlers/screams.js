@@ -1,5 +1,6 @@
 const { db }    = require('../util/admin')
 
+// Get All Screams
 exports.getAllScreams   = (req, res) => {
 
     db.collection('screams').orderBy('createdAt', 'desc').get()
@@ -24,6 +25,8 @@ exports.getAllScreams   = (req, res) => {
  
 }
 
+
+// Post one scream
 exports.postOneScream   = (req, res) => {
 
     if (req.body.body.trim() === '') {
@@ -53,6 +56,7 @@ exports.postOneScream   = (req, res) => {
         })
 
 }
+
 
 // Get one scream
 exports.getScream = (req, res) => {
@@ -86,6 +90,7 @@ exports.getScream = (req, res) => {
 
 }
 
+
 // Comment on Scream
 exports.commentOnScream = (req, res) => {
 
@@ -118,6 +123,7 @@ exports.commentOnScream = (req, res) => {
         })
 
 }
+
 
 // Like a scream
 exports.likeScream  = (req, res) => {
@@ -163,6 +169,7 @@ exports.likeScream  = (req, res) => {
 
 }
 
+
 // Unlike a Scream
 exports.unlikeScream = (req, res) => {
 
@@ -203,6 +210,7 @@ exports.unlikeScream = (req, res) => {
         })
 
 }
+
 
 // Delete Scream
 exports.deleteScream = (req, res) => {
