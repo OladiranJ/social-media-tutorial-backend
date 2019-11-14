@@ -22,8 +22,11 @@ Postman
 ## Concepts Covered
 
 User login/registration and authentification
+
 Image Uploads
+
 Cloud Functions
+
 Firebase deploy and serve
 
 
