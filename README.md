@@ -9,9 +9,13 @@ Link to tutorial can be accessed by clicking [here](https://www.youtube.com/watc
 ## Tools Used
 
 Google Firebase/Firestore
+
 Express
+
 Node.js
+
 Redux
+
 Postman
 
 
