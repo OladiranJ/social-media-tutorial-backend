@@ -1,10 +1,10 @@
 // Configuration Export
 
 module.exports = {
-    apiKey: "AIzaSyBjz1ARYXRXfuikgivVpyfjWbOCtzi_ZZw",
-    authDomain: "social-media-tutorial-backend.firebaseapp.com",
-    databaseURL: "https://social-media-tutorial-backend.firebaseio.com",
-    projectId: "social-media-tutorial-backend",
-    storageBucket: "social-media-tutorial-backend.appspot.com",
-    messagingSenderId: "177605819920"
+    apiKey: process.env.REACT_APP_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_DATABASE_URL,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID
 }
